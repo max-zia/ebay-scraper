@@ -1,14 +1,20 @@
-<head>
-  <meta charset="utf-8">
-  <meta name="language" content="english">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-</head>
-<body>
+{% extends "content/base.html" %}
+
+{% block content %}
   <div>
-    <p>Price Scraper</p>
     <p>{{ term }}</p>
-    {% for name in names %}
-      <p>{{ name }}</p>
+    {% for dict in ebay_data %}
+      <div class="card">
+        <div class="card-body">
+          <h1>{{ dict.name }}</h1> <!-- 
+                                        You might need to rewrite each
+                                        instance of dict.x as dict['x'] 
+                                    -->
+          <h2>{{ dict.price }}</h2>
+          <img src="{{ dict.img }}">
+          <button type="submit" class="btn btn-primary" href="{{ dict.link }}">View</button>
+        </div>
+      </div>
     {% endfor %}
   </div>
-</body>
+{% endblock content %}

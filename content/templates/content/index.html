@@ -1,19 +1,14 @@
-<head>
-  <meta charset="utf-8">
-  <meta name="language" content="english">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-</head>
-<body>
-  <div>
-    <p>Price Scraper</p>
-    <form method="POST" action="{% url 'content:index' %}">
+{% extends "content/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="container">
+    <form method="POST">
       {% csrf_token %}
-      {{ form.searchterm }}
-      {% if form.errors %}
-        <div class="has-error">
-          <div>{{ form.searchterm.errors }}</div>
-        </div>
-      {% endif %}
+      <div class="form-group">
+        {{ form.searchterm|as_crispy_field }}
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
     </form>
   </div>
-</body>
+{% endblock content %}
