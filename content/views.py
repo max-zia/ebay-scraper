@@ -25,8 +25,10 @@ def search(request):
     usersearch = Search.objects.all().order_by('-id')[0]
     term = usersearch.searchterm
 
-    # implement search using content/scrapeutils.py
+    # initialise browser
     browser = Main.get_browser()
+
+    # implement search using content/scrapeutils.py
     Main.implement_search(browser, 'https://www.ebay.co.uk', 'gh-ac', term)
     time.sleep(0.5)
 
@@ -47,7 +49,7 @@ def search(request):
     # initialise context data
     context = {
         'term': term, 
-        'ebay_data': ebay_data,
+        'ebay_data': ebay_data[:10],
     }
     
     return render(request, 'content/search.html', context)

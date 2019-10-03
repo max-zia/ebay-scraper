@@ -1,20 +1,26 @@
 {% extends "content/base.html" %}
 
+{% block header %}
+  <div class="jumbotron text-center">
+    <h4>Search results for {{ term }}</h4>
+  </div>
+{% endblock header %}
+
 {% block content %}
-  <div>
-    <p>{{ term }}</p>
-    {% for dict in ebay_data %}
-      <div class="card">
-        <div class="card-body">
-          <h1>{{ dict.name }}</h1> <!-- 
-                                        You might need to rewrite each
-                                        instance of dict.x as dict['x'] 
-                                    -->
-          <h2>{{ dict.price }}</h2>
-          <img src="{{ dict.img }}">
-          <button type="submit" class="btn btn-primary" href="{{ dict.link }}">View</button>
+  <div class="container">
+    <div class="row mb-5">
+      {% for dict in ebay_data %}
+        <div class="col-md-6 col-lg-4">
+          <div id="{{ forloop.counter }}" class="card mx-2 my-2">
+            <img style="height: 200px" class="card-img-top img-fluid" src="{{ dict.img }}" alt="image {{ forloop.counter }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ dict.price }}</h5>
+              <p class="card-text">{{ dict.name }}</p>
+              <a href="{{ dict.link }}}" class="btn btn-primary">View</a>
+            </div>
+          </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
 {% endblock content %}
